@@ -37,7 +37,7 @@ class Ball {
         
         this.color = "blue";
 
-        this.vx = 0;
+        this.vx = 10;
         this.vy = 0;
     }
 
@@ -54,5 +54,16 @@ var ball = new Ball(canvas, pen);
 function animate(){
     pen.clearRect(0, 0, canvas.width, canvas.height);
     ball.drawBall();
-    ball.x += 1;
+
+    
+    ball.x += ball.vx;
+
+    if(ball.x + 30 > canvas.width){
+        ball.vx = -10;
+    } else if (ball.x - 30 < canvas.width - canvas.width){
+        ball.vx = 10;
+    }
+
+    
+    
 }
