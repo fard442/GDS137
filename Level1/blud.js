@@ -52,5 +52,7 @@ class Ball {
 }
 var ball = new Ball(canvas, pen);
 function animate(){
+    pen.clearRect(0, 0, canvas.width, canvas.height);
     ball.drawBall();
+    ball.x += 1;
 }
