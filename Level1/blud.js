@@ -39,6 +39,8 @@ class Ball {
 
         this.vx = 10;
         this.vy = 10;
+
+        this.counter = 0;
     }
 
     drawBall(){
@@ -54,6 +56,9 @@ var ball = new Ball(canvas, pen);
 function animate(){
     pen.clearRect(0, 0, canvas.width, canvas.height);
     ball.drawBall();
+    pen.fillStyle = "black";
+    pen.font = "28px arial";
+    pen.fillText(`bounze (bounces): ${ball.counter}`, 10, 25)
 
     
     ball.x += ball.vx;
@@ -62,15 +67,19 @@ function animate(){
     //side collisions
     if(ball.x + 30 > canvas.width){
         ball.vx = -10;
+        ball.counter += 1;
     } else if (ball.x - 30 < canvas.width - canvas.width){
         ball.vx = 10;
+        ball.counter += 1;
     }
 
     //top and bottom collision
     if(ball.y + 30 > canvas.height){
         ball.vy = -10;
+        ball.counter += 1;
     } else if (ball.y - 30 < canvas.height - canvas.height){
         ball.vy = 10;
+        ball.counter += 1;
     }
 
     
