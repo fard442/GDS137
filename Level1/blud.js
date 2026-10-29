@@ -38,7 +38,7 @@ class Ball {
         this.color = "blue";
 
         this.vx = 10;
-        this.vy = 0;
+        this.vy = 10;
     }
 
     drawBall(){
@@ -57,11 +57,20 @@ function animate(){
 
     
     ball.x += ball.vx;
+    ball.y += ball.vy;
 
+    //side collisions
     if(ball.x + 30 > canvas.width){
         ball.vx = -10;
     } else if (ball.x - 30 < canvas.width - canvas.width){
         ball.vx = 10;
+    }
+
+    //top and bottom collision
+    if(ball.y + 30 > canvas.height){
+        ball.vy = -10;
+    } else if (ball.y - 30 < canvas.height - canvas.height){
+        ball.vy = 10;
     }
 
     
