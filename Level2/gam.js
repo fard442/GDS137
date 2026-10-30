@@ -20,7 +20,13 @@ class GameObject {
         this.y = canvas.height/2;
         this.lastPosY = 0;
 
-        this.radius = 25;
+        this.width = 25;
+        this.height = 100;
+
+        this.top = this.y
+        this.left = this.x
+        this.right = this.x + this.width / 2
+        this.bottom = this.y + this.height / 2
         
         this.color = "white";
 
@@ -33,7 +39,7 @@ class GameObject {
     drawCircle(){
         this.pen.beginPath();
         this.color = "blue"
-        this.pen.arc(this.x, this.y, this.radius, 0, Math.PI *2);
+        this.pen.arc(this.x, this.y, 25, 0, Math.PI *2);
         this.pen.fillStyle = this.color;
         this.pen.fill();
         this.pen.closePath();
@@ -55,12 +61,12 @@ ball.vy = 5;
 
 function animate(){
     pen.clearRect(0, 0, canvas.width, canvas.height);
+
     player1.drawRect();
     ball.drawCircle();
     
     checkBorders();
 
-    
     ball.x += ball.vx;
     ball.y += ball.vy;
 
@@ -82,6 +88,13 @@ function animate(){
         ball.counter += 1;
     }
     
+    //paddle collision
+    if (ball.x == player1.right && ball.y == player1.right)
+    {
+        console.log("kunk")
+    }
+    console.log(player1.right)
+    
     
 }
 
@@ -94,7 +107,7 @@ function checkBorders(){
     } else if (player1.y - 1 < canvas.height - canvas.height){
         // player1.lastPosY = player1.y;
         player1.y = canvas.height - canvas.height;
-        // console.log(player1.lastPosY);
+        // console.log("b");
     }
 }
 
@@ -102,6 +115,8 @@ function up(w){
     if(w.keyCode == 87)
 	{
 		player1.y -= player1.vy
+        // console.log(player1.top, player1.right)
+        // console.log(player1.bottom, player1.left)
 	} 
 }
 
