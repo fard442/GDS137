@@ -106,3 +106,4 @@ function down(s){
 		player1.y += player1.vy
 	}
 }
+
