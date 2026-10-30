@@ -2,6 +2,10 @@ var canvas = document.getElementById("myCanvas");
 var pen = canvas.getContext("2d");
 
 
+//listeners
+document.addEventListener("keydown", up);
+document.addEventListener("keydown", down);
+
 var timer;
 
 var interval = 1000/60;
@@ -52,24 +56,38 @@ function animate(){
     // player1.x += player1.vx;
     // player1.y += player1.vy;
 
-    //side collisions
-    if(player1.x + 30 > canvas.width){
-        player1.vx = -10;
-        player1.counter += 1;
-    } else if (player1.x - 30 < canvas.width - canvas.width){
-        player1.vx = 10;
-        player1.counter += 1;
-    }
+    // //side collisions
+    // if(player1.x + 30 > canvas.width){
+    //     player1.vx = -10;
+    //     player1.counter += 1;
+    // } else if (player1.x - 30 < canvas.width - canvas.width){
+    //     player1.vx = 10;
+    //     player1.counter += 1;
+    // }
 
-    //top and bottom collision
-    if(player1.y + 30 > canvas.height){
-        player1.vy = -10;
-        player1.counter += 1;
-    } else if (player1.y - 30 < canvas.height - canvas.height){
-        player1.vy = 10;
-        player1.counter += 1;
-    }
+    // //top and bottom collision
+    // if(player1.y + 30 > canvas.height){
+    //     player1.vy = -10;
+    //     player1.counter += 1;
+    // } else if (player1.y - 30 < canvas.height - canvas.height){
+    //     player1.vy = 10;
+    //     player1.counter += 1;
+    // }
 
     
     
+}
+
+function up(w){
+    if(w.keyCode == 87)
+	{
+		player1.y -= player1.vy
+	} 
+}
+
+function down(s){
+    if(s.keyCode == 83)
+	{
+		player1.y += player1.vy
+	}
 }
