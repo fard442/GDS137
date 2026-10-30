@@ -18,6 +18,7 @@ class GameObject {
 
         this.x = canvas.width/2;
         this.y = canvas.height/2;
+        this.lastPosY = 0;
 
         this.radius = 50;
         
@@ -50,7 +51,7 @@ function animate(){
     pen.clearRect(0, 0, canvas.width, canvas.height);
     player1.drawRect();
     
-    
+    checkBorders();
 
     
     // player1.x += player1.vx;
@@ -65,17 +66,31 @@ function animate(){
     //     player1.counter += 1;
     // }
 
-    // //top and bottom collision
-    // if(player1.y + 30 > canvas.height){
-    //     player1.vy = -10;
-    //     player1.counter += 1;
-    // } else if (player1.y - 30 < canvas.height - canvas.height){
-    //     player1.vy = 10;
-    //     player1.counter += 1;
+    //top and bottom collision
+
+    // if(player1.y + 50 > canvas.height){
+    //     lastPosY = player1.y;
+    //     player1.y = lastPosY;
+    // } else if (player1.y - 50 < canvas.height - canvas.height){
+    //     lastPosY = player1.y;
+    //     player1.y = lastPosY;
     // }
 
     
     
+}
+
+//out of bounds boxes
+function checkBorders(){
+    if(player1.y + 101 >= canvas.height){
+        // player1.lastPosY = player1.y;
+        player1.y = canvas.height - 101;
+        // console.log(player1.lastPosY);
+    } else if (player1.y - 1 < canvas.height - canvas.height){
+        // player1.lastPosY = player1.y;
+        player1.y = canvas.height - canvas.height;
+        // console.log(player1.lastPosY);
+    }
 }
 
 function up(w){
