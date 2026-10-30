@@ -107,4 +107,4 @@ function down(s){
 	}
 }
 
-console.log(update damn you)
+console.log("update damn you");
