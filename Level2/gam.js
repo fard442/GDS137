@@ -20,9 +20,9 @@ class GameObject {
         this.y = canvas.height/2;
         this.lastPosY = 0;
 
-        this.radius = 50;
+        this.radius = 25;
         
-        this.color = "blue";
+        this.color = "white";
 
         this.vx = 10;
         this.vy = 10;
@@ -32,6 +32,7 @@ class GameObject {
 
     drawCircle(){
         this.pen.beginPath();
+        this.color = "blue"
         this.pen.arc(this.x, this.y, this.radius, 0, Math.PI *2);
         this.pen.fillStyle = this.color;
         this.pen.fill();
@@ -39,43 +40,47 @@ class GameObject {
     }
 
     drawRect(){
+        this.color = "black"
+        this.pen.fillStyle = this.color;
         this.pen.fillRect(this.x, this.y, 25, 100);
     }
     
 }
 
 var player1 = new GameObject(canvas, pen);
+var ball = new GameObject(canvas, pen);
 player1.x = 40;
+ball.vx = 5;
+ball.vy = 5;
 
 function animate(){
     pen.clearRect(0, 0, canvas.width, canvas.height);
     player1.drawRect();
+    ball.drawCircle();
     
     checkBorders();
 
     
-    // player1.x += player1.vx;
-    // player1.y += player1.vy;
+    ball.x += ball.vx;
+    ball.y += ball.vy;
 
-    // //side collisions
-    // if(player1.x + 30 > canvas.width){
-    //     player1.vx = -10;
-    //     player1.counter += 1;
-    // } else if (player1.x - 30 < canvas.width - canvas.width){
-    //     player1.vx = 10;
-    //     player1.counter += 1;
-    // }
+    //side collisions
+    if(ball.x + 30 > canvas.width){
+        ball.vx = -5;
+        ball.counter += 1;
+    } else if (ball.x - 30 < canvas.width - canvas.width){
+        ball.vx = 5;
+        ball.counter += 1;
+    }
 
     //top and bottom collision
-
-    // if(player1.y + 50 > canvas.height){
-    //     lastPosY = player1.y;
-    //     player1.y = lastPosY;
-    // } else if (player1.y - 50 < canvas.height - canvas.height){
-    //     lastPosY = player1.y;
-    //     player1.y = lastPosY;
-    // }
-
+    if(ball.y + 30 > canvas.height){
+        ball.vy = -5;
+        ball.counter += 1;
+    } else if (ball.y - 30 < canvas.height - canvas.height){
+        ball.vy = 5;
+        ball.counter += 1;
+    }
     
     
 }
@@ -107,4 +112,4 @@ function down(s){
 	}
 }
 
-console.log("update damn you");
+
