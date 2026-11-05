@@ -16,8 +16,8 @@ class GameObject {
         this.canvas = canvas;
         this.pen = pen;
 
-        this.x = canvas.width/2;
-        this.y = canvas.height/2;
+        this.x = canvas.width/4;
+        this.y = canvas.height/3;
         this.lastPosY = 0;
 
         this.width = 25;
@@ -25,13 +25,13 @@ class GameObject {
 
         this.top = this.y
         this.left = this.x
-        this.right = this.x + this.width / 2
-        this.bottom = this.y + this.height / 2
+        this.right = this.x + this.width
+        this.bottom = this.y + this.height
         
         this.color = "white";
 
-        this.vx = 10;
-        this.vy = 10;
+        this.vx = 30;
+        this.vy = 30;
 
         this.counter = 0;
     }
@@ -48,10 +48,12 @@ class GameObject {
     drawRect(){
         this.color = "black"
         this.pen.fillStyle = this.color;
-        this.pen.fillRect(this.x, this.y, 25, 100);
+        this.pen.fillRect(this.x, this.y, this.width, this.height);
     }
     
 }
+
+var testBar = new GameObject(canvas, pen);
 
 var player1 = new GameObject(canvas, pen);
 var ball = new GameObject(canvas, pen);
@@ -59,11 +61,27 @@ player1.x = 40;
 ball.vx = 5;
 ball.vy = 5;
 
+testBar.x = 60
+
 function animate(){
     pen.clearRect(0, 0, canvas.width, canvas.height);
 
+    //test
+    // testBar.top = testBar.y
+    // testBar.right = testBar.x + testBar.width / 2
+    // testBar.bottom = testBar.y + testBar.height
+    player1.top = player1.y
+    player1.right = player1.x + player1.width / 2
+    player1.left = player1.x
+    player1.bottom = player1.y + player1.height
+
+   
+
+    // testBar.drawRect();
+
     player1.drawRect();
     ball.drawCircle();
+    
     
     checkBorders();
 
@@ -89,12 +107,54 @@ function animate(){
     }
     
     //paddle collision
-    if (ball.x == player1.right && ball.y == player1.right)
+    // if (ball.x == player1.right && ball.y == player1.bottom || ball.y == player1.top && ball.x <= player1.right)
+    // {
+    //     console.log("kunk")
+    //     console.log(player1.right, ball.y)
+    //     ball.vx = -0
+    //     ball.vy = -0
+    // }
+
+    // if (ball.x == player1.right && ball.y == player1.bottom || ball.x == player1.left && ball.y == player1.bottom || ball.x == player1.right && ball.y == player1.top || ball.x == player1.left && ball.y == player1.top)
+    // {
+    //     console.log("kunk")
+    //     console.log(ball.x, ball.y)
+    //     console.log(player1.right, player1.left)
+    //     console.log(player1.top, player1.bottom)
+    //     ball.vx = -0
+    //     ball.vy = -0
+    // }
+
+    if(ball.x <= player1.right)
     {
-        console.log("kunk")
+        console.log("right side")
     }
-    console.log(player1.right)
+    if(ball.x >= player1.left)
+    {
+        console.log("left side")
+    }
+    if(ball.y <= player1.top)
+    {
+        console.log("top")
+    }
+    if(ball.x >= player1.bottom)
+    {
+        console.log("bottom")
+    }
     
+    
+    
+    
+
+    // if (ball.x <= testBar.right && ball.y == testBar.bottom || ball.y == testBar.top && ball.x <= testBar.right)
+    // {
+    //     console.log("kunk")
+    //     console.log(testBar.right, ball.y)
+    //     ball.vx = 0
+    //     ball.vy = 0
+    // }
+    // console.log(testBar.right, testBar.top, testBar.bottom)
+    // console.log(ball.x, ball.y)
     
 }
 
