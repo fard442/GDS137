@@ -91,12 +91,11 @@ function animate(){
     //side collisions
     if(ball.x + 30 > canvas.width){
         ball.vx = -5;
-        ball.counter += 1;
     } 
-    // else if (ball.x - 30 < canvas.width - canvas.width){
-    //     ball.vx = 5;
-    //     ball.counter += 1;
-    // }
+    else if (ball.x - 30 < canvas.width - canvas.width){
+        ball.x = canvas.width/2;
+        ball.y = canvas.height/2;
+    }
 
     //top and bottom collision
     if(ball.y + 30 > canvas.height){
