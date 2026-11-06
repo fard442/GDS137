@@ -59,7 +59,7 @@ var player1 = new GameObject(canvas, pen);
 var ball = new GameObject(canvas, pen);
 player1.x = 20;
 ball.vx = 3;
-ball.vy = 0;
+ball.vy = 2;
 
 testBar.x = 60
 
