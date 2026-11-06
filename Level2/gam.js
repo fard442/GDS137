@@ -20,8 +20,8 @@ class GameObject {
         this.y = canvas.height/3;
         this.lastPosY = 0;
 
-        this.width = 25;
-        this.height = 100;
+        this.width = 10;
+        this.height = 150;
 
         this.top = this.y
         this.left = this.x
@@ -39,7 +39,7 @@ class GameObject {
     drawCircle(){
         this.pen.beginPath();
         this.color = "blue"
-        this.pen.arc(this.x, this.y, 25, 0, Math.PI *2);
+        this.pen.arc(this.x, this.y, 15, 0, Math.PI *2);
         this.pen.fillStyle = this.color;
         this.pen.fill();
         this.pen.closePath();
@@ -58,8 +58,8 @@ var testBar = new GameObject(canvas, pen);
 var player1 = new GameObject(canvas, pen);
 var ball = new GameObject(canvas, pen);
 player1.x = 20;
-ball.vx = 5;
-ball.vy = 5;
+ball.vx = 3;
+ball.vy = 0;
 
 testBar.x = 60
 
@@ -71,7 +71,7 @@ function animate(){
     // testBar.right = testBar.x + testBar.width / 2
     // testBar.bottom = testBar.y + testBar.height
     player1.top = player1.y
-    player1.right = player1.x + player1.width / 2
+    player1.right = player1.x + player1.width
     player1.left = player1.x
     player1.bottom = player1.y + player1.height
 
@@ -90,20 +90,18 @@ function animate(){
 
     //side collisions
     if(ball.x + 30 > canvas.width){
-        ball.vx = -5;
+        ball.vx = -3;
     } 
-    else if (ball.x - 30 < canvas.width - canvas.width){
+    else if (ball.x < canvas.width - canvas.width){
         ball.x = canvas.width/2;
         ball.y = canvas.height/2;
     }
 
     //top and bottom collision
     if(ball.y + 30 > canvas.height){
-        ball.vy = -5;
-        ball.counter += 1;
+        ball.vy = -3;
     } else if (ball.y - 30 < canvas.height - canvas.height){
-        ball.vy = 5;
-        ball.counter += 1;
+        ball.vy = 3;
     }
     
     //paddle collision
@@ -125,12 +123,31 @@ function animate(){
     //     ball.vy = -0
     // }
 
-    if(ball.x <= player1.right + 15 && ball.x >= player1.left && ball.y >= player1.top && ball.y <= player1.bottom)
+    
+    //paddle collision
+    if(ball.x <= player1.right + 5 && ball.x >= player1.left && ball.y >= player1.top && ball.y <= player1.bottom)
     {
-        // console.log("right side")
-        ball.vx = -ball.vx
-        ball.vy = -ball.vy
+        //first third/top part of paddle
+        if(ball.y - 55 <= player1.y - player1.height / 6)
+        {
+            console.log("top")
+            ball.vx = +3
+            ball.vy = -3
+        }
+        //bottom part
+        if(ball.y >= player1.bottom - 55)
+        {
+            console.log("bot")
+            ball.vx = +3
+            ball.vy = +3
+        } else 
+            {
+                console.log("mid")
+                ball.vx = 3
+            }
+        
     }
+    // console.log(ball.y, player1.bottom - 55, player1.bottom)
     
     
     
