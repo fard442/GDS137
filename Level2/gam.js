@@ -57,7 +57,7 @@ var testBar = new GameObject(canvas, pen);
 
 var player1 = new GameObject(canvas, pen);
 var ball = new GameObject(canvas, pen);
-player1.x = 40;
+player1.x = 20;
 ball.vx = 5;
 ball.vy = 5;
 
@@ -92,10 +92,11 @@ function animate(){
     if(ball.x + 30 > canvas.width){
         ball.vx = -5;
         ball.counter += 1;
-    } else if (ball.x - 30 < canvas.width - canvas.width){
-        ball.vx = 5;
-        ball.counter += 1;
-    }
+    } 
+    // else if (ball.x - 30 < canvas.width - canvas.width){
+    //     ball.vx = 5;
+    //     ball.counter += 1;
+    // }
 
     //top and bottom collision
     if(ball.y + 30 > canvas.height){
@@ -125,22 +126,13 @@ function animate(){
     //     ball.vy = -0
     // }
 
-    if(ball.x <= player1.right)
+    if(ball.x <= player1.right + 15 && ball.x >= player1.left && ball.y >= player1.top && ball.y <= player1.bottom)
     {
-        console.log("right side")
+        // console.log("right side")
+        ball.vx = -ball.vx
+        ball.vy = -ball.vy
     }
-    if(ball.x >= player1.left)
-    {
-        console.log("left side")
-    }
-    if(ball.y <= player1.top)
-    {
-        console.log("top")
-    }
-    if(ball.x >= player1.bottom)
-    {
-        console.log("bottom")
-    }
+    
     
     
     
